@@ -1,0 +1,115 @@
+.main-page-excluding-header {
+  padding: 12px;
+}
+
+.categories-list {
+  display: flex;
+  overflow-y: auto;
+  width: 100%;
+  align-items: flex-end;
+  /* margin-top: 20px; */
+  /* justify-content: center; */
+  /* padding-left: -20px; */
+}
+
+.dishes-list-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -40px;
+}
+
+.dish-card {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0.5, 0.5, 0.5, 0.5);
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+}
+
+.dish-card-2 {
+  display: flex;
+}
+
+.dish-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 12px;
+}
+
+.veg-non-veg-symbol {
+  height: 30px;
+  width: 30px;
+  margin-top: 30px;
+}
+
+.dish-name {
+  align-self: flex-start;
+}
+
+.dish-price {
+  font-family: roboto;
+  font-size: 22px;
+  color: #4e524f;
+  font-weight: bold;
+}
+
+.dish-description {
+  font-family: roboto;
+  font-size: 20px;
+  color: #818582;
+}
+
+.button {
+  background-color: green;
+  border-radius: 40px;
+  border: 0;
+  padding: 10px;
+  font-family: roboto;
+  color: #ffffff;
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.customizations-text {
+  font-family: roboto;
+  color: blue;
+}
+
+.not-available {
+  font-family: roboto;
+  color: orange;
+}
+
+.calories {
+  font-family: roboto;
+  font-size: 22px;
+  color: orange;
+  align-self: center;
+}
+
+@media (max-width: 576px) {
+  .dish-img {
+    height: 80px;
+    width: 80%;
+  }
+}
+
+.dish-img {
+  height: 80px;
+  width: 80px;
+}
+
+.minus-plus-btn {
+  background-color: transparent;
+  border: 0;
+  color: #ffffff;
+  font-size: 20px;
+}

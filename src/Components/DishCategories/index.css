@@ -1,0 +1,52 @@
+@media (max-width: 576px) {
+  .each-category {
+    width: 50%;
+    color: black;
+    font-family: roboto;
+    font-size: 24px;
+    margin-right: 80px;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: orange;
+    text-decoration-color: orange;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .category-list-item {
+    list-style-type: none;
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+@media (min-width: 577px) {
+  .each-category {
+    margin-right: 80px;
+    font-family: roboto;
+    font-size: 24px;
+    color: #000000;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .category-list-item {
+    list-style-type: none;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: orange;
+    text-decoration-color: orange;
+    background-color: transparent;
+    border: 0;
+  }
+}
