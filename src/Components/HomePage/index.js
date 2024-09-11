@@ -19,6 +19,7 @@ class HomePage extends Component {
   }
 
   getDishes = async () => {
+    const {activeCategory} = this.state
     const url =
       'https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details'
     const options = {method: 'GET'}
@@ -33,9 +34,7 @@ class HomePage extends Component {
     }))
 
     const activeCatDishes = data[0].table_menu_list
-      .filter(
-        eachItem => eachItem.menu_category_id === this.state.activeCategory,
-      )
+      .filter(eachItem => eachItem.menu_category_id === activeCategory)
       .flatMap(eachItem =>
         eachItem.category_dishes.map(eachDish => ({
           dishId: eachDish.dish_id,
@@ -59,8 +58,8 @@ class HomePage extends Component {
     })
   }
 
-  onChangeCategory = category => {
-    this.setState({activeCategory: category})
+  onChangeCategory = async category => {
+    await this.setState({activeCategory: category})
     this.getDishes()
   }
 
@@ -114,6 +113,7 @@ class HomePage extends Component {
               <li className="dish-card" key={eachItem.dishId}>
                 <div className="dish-card-2">
                   <img
+                    alt={eachItem.dishType}
                     src={
                       eachItem.dishType === 1
                         ? 'https://res.cloudinary.com/dqv0mp6k8/image/upload/v1725866653/Screenshot_2024-09-09_125253_hlaejd.png'
@@ -133,16 +133,20 @@ class HomePage extends Component {
                     <p className="button">
                       {eachItem.dishCount > 0 ? (
                         <button
+                          type="button"
                           className="minus-plus-btn"
                           onClick={() => this.onReduceQuantity(eachItem.dishId)}
                         >
                           -
                         </button>
                       ) : (
-                        <button className="minus-plus-btn"> - </button>
+                        <button type="button" className="minus-plus-btn">
+                          -
+                        </button>
                       )}
                       {eachItem.dishCount}
                       <button
+                        type="button"
                         className="minus-plus-btn"
                         onClick={() => this.onIncreaseQuantity(eachItem.dishId)}
                       >
@@ -160,7 +164,11 @@ class HomePage extends Component {
                   </div>
                 </div>
                 <p className="calories"> {eachItem.dishCalories} Calories </p>
-                <img src={eachItem.dishImage} className="dish-img" />
+                <img
+                  src={eachItem.dishImage}
+                  className="dish-img"
+                  alt={eachItem.dishName}
+                />
               </li>
             ))}
           </ul>
