@@ -12,6 +12,7 @@ class HomePage extends Component {
     displayItems: [],
     tableMenuList: [],
     cartCount: 0,
+    restaurantName: '',
   }
 
   componentDidMount() {
@@ -25,7 +26,7 @@ class HomePage extends Component {
     const options = {method: 'GET'}
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     // console.log(data[0].table_menu_list[0].category_dishes)
 
     const updatedMenuList = data[0].table_menu_list.map(eachItem => ({
@@ -51,10 +52,11 @@ class HomePage extends Component {
         })),
       )
 
-    // console.log(updatedDishes)
+    // console.log(activeCatDishes)
     await this.setState({
       tableMenuList: updatedMenuList,
       displayItems: activeCatDishes,
+      restaurantName: data[0].restaurant_name,
     })
   }
 
@@ -93,10 +95,16 @@ class HomePage extends Component {
   }
 
   render() {
-    const {tableMenuList, activeCategory, displayItems, cartCount} = this.state
+    const {
+      tableMenuList,
+      activeCategory,
+      displayItems,
+      cartCount,
+      restaurantName,
+    } = this.state
     return (
       <>
-        <Header cartCount={cartCount} />
+        <Header cartCount={cartCount} restaurantName={restaurantName} />
         <div className="main-page-excluding-header">
           <div className="categories-list">
             {tableMenuList.map(eachItem => (
@@ -130,36 +138,42 @@ class HomePage extends Component {
                     <p className="dish-description">
                       {eachItem.dishDescription}
                     </p>
-                    <p className="button">
-                      {eachItem.dishCount > 0 ? (
+
+                    {eachItem.dishAvailability ? (
+                      <p className="button">
+                        {eachItem.dishCount > 0 ? (
+                          <button
+                            type="button"
+                            className="minus-plus-btn"
+                            onClick={() =>
+                              this.onReduceQuantity(eachItem.dishId)
+                            }
+                          >
+                            -
+                          </button>
+                        ) : (
+                          <button type="button" className="minus-plus-btn">
+                            -
+                          </button>
+                        )}
+                        {eachItem.dishCount}
                         <button
                           type="button"
                           className="minus-plus-btn"
-                          onClick={() => this.onReduceQuantity(eachItem.dishId)}
+                          onClick={() =>
+                            this.onIncreaseQuantity(eachItem.dishId)
+                          }
                         >
-                          -
+                          +
                         </button>
-                      ) : (
-                        <button type="button" className="minus-plus-btn">
-                          -
-                        </button>
-                      )}
-                      {eachItem.dishCount}
-                      <button
-                        type="button"
-                        className="minus-plus-btn"
-                        onClick={() => this.onIncreaseQuantity(eachItem.dishId)}
-                      >
-                        +
-                      </button>
-                    </p>
+                      </p>
+                    ) : (
+                      <p className="not-available"> Not available </p>
+                    )}
                     {eachItem.addonCat.length > 0 && (
                       <p className="customizations-text">
                         Customizations available
                       </p>
-                    )}
-                    {eachItem.dishAvailability === false && (
-                      <p className="not-available"> Not Available </p>
                     )}
                   </div>
                 </div>

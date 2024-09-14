@@ -3,11 +3,11 @@ import './index.css'
 import {FiShoppingCart} from 'react-icons/fi'
 
 const Header = props => {
-  const {cartCount} = props
+  const {cartCount, restaurantName} = props
 
   return (
     <div className="header">
-      <h1 className="header-heading"> UNI Resto Cafe </h1>
+      <h1 className="header-heading"> {restaurantName} </h1>
       <div className="cart-icon-and-quantity-container">
         <p className="my-orders"> My Orders </p>
         <FiShoppingCart className="cart-icon" />
